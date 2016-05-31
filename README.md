@@ -5,7 +5,7 @@ This repository provides [MariaDB Database Replication](http://docs.jelastic.com
 
 **MariaDB Database Replication** is used to solve performance problems, to support the db backups, and to alleviate system failures. It enables data from one database server (master) to be replicated to another (slave).
 
-**Engine**: none
+**Engine**: java
 
 **Environment topology**:
 
