@@ -1,7 +1,6 @@
 # Jelastic MariaDB Database Replication Installation Package 
 
 This repository provides [MariaDB Database Replication](http://docs.jelastic.com/mariadb-master-slave-replication/) JPS-based installation package for Jelastic Platform.
-[![GET IT HOSTED](https://raw.githubusercontent.com/JelasticJPS/MariaDbReplic/master/images/getithosted.png)](http://go.jelastic.com/test?hoster-select=1&theme=modern&app=https://raw.githubusercontent.com/JelasticJPS/MariaDbReplic/master/MariaDbReplic-0.1.json)
 
 **MariaDB Database Replication** is used to solve performance problems, to support the db backups, and to alleviate system failures. It enables data from one database server (master) to be replicated to another (slave).
 
