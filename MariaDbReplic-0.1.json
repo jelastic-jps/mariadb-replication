@@ -1,0 +1,85 @@
+{
+	"jpsType": "install",
+	"application": {
+		"id": "mariadbreplic",
+		"categories": [
+				"apps/clustered-dbs", "apps/clusters"
+		],
+		"logo": "https://raw.githubusercontent.com/JelasticJPS/MariaDbReplic/master/images/maria.png",
+		"description": {
+			"text": "Master-slave replication is used to solve performance problems, to support the db backups, and to alleviate system failures. It enables data from one database server (master) to be replicated to another (slave)"
+		},
+		"success": {
+			"text": "The environment with multiple databases has been successfully created. The login and password of your database servers are sent to your email.\nPlease wait a minute for the replication settings to be completed. The process can be monitored in the <b>cron > mysql</b> file of your database servers. This file becomes empty when the configurations are finished. <br><br /> <table style='font-size:13px; border: none;'><tr><td>Admin panel URL:</td><td style='padding-left: 10px;'><a href='${nodes.mariadb.url}' target='_blank'>${nodes.mariadb.url}/</a></td></tr></table><br />To add custom domain name for your MariaDB installation follow the steps described in our <a href='http://docs.jelastic.com/custom-domains' target='_blank'>documentation",
+			"email": "The environment with multiple databases has been successfully created. The login and password of your database servers are sent to your email.\nPlease wait a minute for the replication settings to be completed. The process can be monitored in the <b>cron > mysql</b> file of your database servers. This file becomes empty when the configurations are finished. <br><br /> <table style='font-size:13px; border: none;'><tr><td>Admin panel URL:</td><td style='padding-left: 10px;'><a href='${nodes.mariadb.url}' target='_blank'>${nodes.mariadb.url}/</a></td></tr></table><br />To add custom domain name for your MariaDB installation follow the steps described in our <a href='http://docs.jelastic.com/custom-domains' target='_blank'>documentation"
+		},
+		"name": "MariaDB Database Replication",
+		"env": {
+			"topology": {
+				"nodes": [{
+						"cloudlets": 16,
+						"count": 2,
+						"nodeType": "mariadb"
+					}
+				]
+			}
+		},
+		"onInstall": {
+			"call": "configureReplication"
+		},
+		"procedures": [{
+				"id": "configureReplication",
+				"onCall": [{
+						"replaceInFile": [{
+								"nodeMission": "sqldb",
+								"path": "${SYSTEM_ETC}/my.cnf",
+								"replacements": [{
+										"pattern": ".*log-bin.*",
+										"replacement": "log-bin=mysql-bin"
+									}, {
+										"pattern": ".*autoconfiguration mark.*",
+										"replacement": "\n"
+									}
+								]
+							}
+						]
+					}, {
+						"replaceInFile": [{
+								"nodeId": "${nodes.sqldb[0].id}",
+								"path": "${SYSTEM_ETC}/my.cnf",
+								"replacements": [{
+										"pattern": "server-id\\s*= 1",
+										"replacement": "server-id = 2"
+									}
+								]
+							}
+						]
+					}, {
+						"restartNodes": [{
+								"nodeMission": "sqldb"
+							}
+						]
+					}, {
+						"executeShellCommands": [{
+								"nodeId": "${nodes.sqldb[0].id}",
+								"commands": [
+										"mysql -uroot -p${nodes.sqldb.password} -e \"GRANT REPLICATION SLAVE ON *.* TO rpl@${nodes.sqldb[1].address} IDENTIFIED BY 'rpl';\" 2>&1",
+										"mysqlreplicate --master=root:${nodes.sqldb.password}@${nodes.sqldb[0].address}:${nodes.sqldb.port} --slave=root:${nodes.sqldb.password}@${nodes.sqldb[1].address}:${nodes.sqldb.port}  --rpl-user=rpl:rpl 2>&1"
+								]
+							}
+						]
+					}, {
+						"restartNodes": [{
+								"nodeMission": "sqldb"
+							}
+						]
+					}
+				]
+			}
+		],
+		"type": "java",
+		"homepage": "http://docs.jelastic.com/mariadb-master-slave-replication",
+		"version": "0.1"
+	},
+	"jpsVersion": "0.5"
+}
