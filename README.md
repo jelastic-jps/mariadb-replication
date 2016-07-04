@@ -7,7 +7,7 @@ The JPS package deploys MariaDB Cluster with preconfigured replication that init
 This package is designed to solve a number of different problems with performance, supporting the backup of different databases, and as a part of a larger solution to alleviate system failures.<br />
 It enables data from one database server (the master) to be replicated to to another (the slave). The master logs the updates, which then ripple through to the slave. The slave outputs a message stating that it has received the update successfully, thus allowing to send the subsequent updates. Master-slave replication can be asynchronous.<br />
 
-The target usage for replication in MySQL databases includes:
+The target usage for replication in MariaDB databases includes:
   -  Data security
   -  Analytics
   -  Long-distance data distribution
