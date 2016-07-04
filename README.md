@@ -1,41 +1,38 @@
-# Jelastic MariaDB Database Replication Installation Package 
+[![MariaDB Database Replication](images/maria.png)](../../../mariadb-replication)
+## MariaDB Database Replication
 
-This repository provides [MariaDB Database Replication](http://docs.jelastic.com/mariadb-master-slave-replication/) JPS-based installation package for Jelastic Platform.
+The JPS package deploys MariaDB Cluster with preconfigured replication that initially contains 2 database containers. The package provides the solution for solving performance problems, DB backups support, gives ability to alleviate system failures. It enables data from one database server (the master) to be replicated to another (the slave).
 
-**MariaDB Database Replication** is used to solve performance problems, to support the db backups, and to alleviate system failures. It enables data from one database server (master) to be replicated to another (slave).
+### Highlights
+This package is designed to solve a number of different problems with performance, supporting the backup of different databases, and as a part of a larger solution to alleviate system failures.<br />
+It enables data from one database server (the master) to be replicated to to another (the slave). The master logs the updates, which then ripple through to the slave. The slave outputs a message stating that it has received the update successfully, thus allowing to send the subsequent updates. Master-slave replication can be asynchronous.<br />
 
-**Engine**: java
+The target usage for replication in MySQL databases includes:
+  -  Data security
+  -  Analytics
+  -  Long-distance data distribution
 
-**Environment topology**:
+###Environment Topology
 
-1. 
-   - node type: mariadb
-   - count: 2
-   - cloudlets: 16
-   
+![MySQL Database Replication Topology](https://docs.google.com/drawings/d/1AbT0G_7bgSz36nVP5o84qE0hG33gzPnesJn-OOns4XY/pub?w=301&h=149)
 
-### What it can be used for?
-Master-slave replication is used to solve a number of different problems with performance, supporting the backup of different databases, and as a part of a larger solution to alleviate system failures. It enables data from one database server (the master) to be replicated to one or more database servers (the slaves).
-<br />
-The master logs the updates, which then ripple through to the slaves. The slave outputs a message stating that it has received the update successfully, thus allowing to send the subsequent updates. Master-slave replication can be either synchronous or asynchronous. The difference is simply the timing of propagation of changes. If the changes are made to the master and slave at the same time, it is synchronous. If changes are queued up and written later, it is asynchronous.
+### Specifics
 
+Layer              |     Server    | Number of CTs <br/> by default | Cloudlets per CT <br/> (reserved/dynamic) | Options
+----------------- | --------------| :-----------------------------------------: | :-------------------------------------------------------: | :-----:
+DB                  |    MariaDB    |       2                                             |           1 / 16                                                       | -
 
-### What Jelastic JPS package is?
+* DB - Database 
+* CT - Container
 
-Jelastic JPS package represents an one-click installation solution, that allows to get the desired project hosted at Jelastic Cloud in a matter of minutes. Being based on [Jelastic Packaging Standard](https://docs.jelastic.com/jps), it automates creation of the necessary environment and subsequent application deployment to it. Herewith, all of the required properties and behaviors are predefined within the package JSON manifest, so you instantly get the ready-to-go solution.
-The full list of the available at a platform one-click packages can be seen at the corresponding same-named section of [Jelastic Marketplace](https://docs.jelastic.com/marketplace#apps].
+**MariaDB Database**: 5.5.47
 
-### How to deploy a package?
-###### For Developers
+### Deployment
 
-In case you can’t find the desired solution within the list of available ones at your dashboard, just copy and save the content of its manifest as a *.json* file and [import](https://docs.jelastic.com/environment-export-import#import) it to the dashboard. Herewith, you can apply any necessary adjustments to template settings through this file (if such are required) and install its customized version in the similar way.
+In order to get this solution instantly deployed, click the "Get It Hosted Now" button, specify your email address within the widget, choose one of the [Jelastic Public Cloud providers](https://jelastic.cloud) and press Install.
 
-###### For Cluster Admins
+[![GET IT HOSTED](https://raw.githubusercontent.com/jelastic-jps/jpswiki/master/images/getithosted.png)](https://jelastic.com/install-application/?manifest=https%3A%2F%2Fgithub.com%2Fjelastic-jps%2Fmariadb-replication%2Fraw%2Fmaster%2Fmanifest.jps)
 
-In order to add the desired JPS package to your platform and make it available for users, perform the following:
-- copy content of its manifest 
-- switch to the [Marketplace](http://ops-docs.jelastic.com/marketplace-46) section of your JCA panel and choose **Add > New Installation** menu option
-- paste the copied strings into the appeared frame and **Save** the template
-- choose your newly added package within the list and click on **Publish** above
+To deploy this package to Jelastic Private Cloud, import [this JPS manifest](../../raw/master/manifest.jps) within your dashboard ([detailed instruction](https://docs.jelastic.com/environment-export-import#import)).
 
-Also, you are able to adjust the given package template according to your needs and provide its customized version.
+More information about Jelastic JPS package and about installation widget for your website can be found in the [Jelastic JPS Application Package](https://github.com/jelastic-jps/jpswiki/wiki/Jelastic-JPS-Application-Package) reference.
