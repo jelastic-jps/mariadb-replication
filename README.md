@@ -14,7 +14,7 @@ The target usage for replication in MariaDB databases includes:
 
 ###Environment Topology
 
-![MySQL Database Replication Topology](https://docs.google.com/drawings/d/1AbT0G_7bgSz36nVP5o84qE0hG33gzPnesJn-OOns4XY/pub?w=301&h=149)
+![MariaDB Database Replication Topology](https://docs.google.com/drawings/d/1AbT0G_7bgSz36nVP5o84qE0hG33gzPnesJn-OOns4XY/pub?w=301&h=149)
 
 ### Specifics
 
