@@ -12,9 +12,9 @@ The target usage for replication in MariaDB databases includes:
   -  Analytics
   -  Long-distance data distribution
 
-###Environment Topology
+### Environment Topology
 
-![MariaDB Database Replication Topology](https://docs.google.com/drawings/d/1AbT0G_7bgSz36nVP5o84qE0hG33gzPnesJn-OOns4XY/pub?w=301&h=149)
+![mariadb-replication.png](images/mariadb-replication.png)
 
 ### Specifics
 
