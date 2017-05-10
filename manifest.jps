@@ -64,7 +64,7 @@
 								"nodeId": "${nodes.sqldb[0].id}",
 								"commands": [
 										"mysql -uroot -p${nodes.sqldb.password} -e \"GRANT REPLICATION SLAVE ON *.* TO rpl@${nodes.sqldb[1].address} IDENTIFIED BY 'rpl';\" 2>&1",
-										"mysqlreplicate --master=root:${nodes.sqldb.password}@${nodes.sqldb[0].address}:${nodes.sqldb.port} --slave=root:${nodes.sqldb.password}@${nodes.sqldb[1].address}:${nodes.sqldb.port}  --rpl-user=rpl:rpl 2>&1"
+										"mysqlreplicate --master=root:${nodes.sqldb.password}@${nodes.sqldb[0].address} --slave=root:${nodes.sqldb.password}@${nodes.sqldb[1].address}  --rpl-user=rpl:rpl 2>&1"
 								]
 							}
 						]
