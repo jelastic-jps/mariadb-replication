@@ -17,7 +17,7 @@
 		"env": {
 			"topology": {
 				"nodes": [{
-						"cloudlets": 16,
+						"cloudlets": 8,
 						"count": 2,
 						"nodeType": "mariadb"
 					}
