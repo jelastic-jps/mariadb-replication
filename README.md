@@ -1,11 +1,11 @@
 [![MariaDB Database Replication](images/maria.png)](../../../mariadb-replication)
 ## MariaDB Database Replication
 
-The JPS package deploys MariaDB Cluster with preconfigured replication that initially contains 2 database containers. The package provides the solution for solving performance problems, DB backups support, gives ability to alleviate system failures. It enables data from one database server (the master) to be replicated to another (the slave).
+The JPS package deploys MariaDB Cluster with preconfigured replication that initially contains 2 database containers. The package provides the solution for solving performance problems, DB backups support, gives ability to alleviate system failures. It enables data from one database server (the primary previously known as master) to be replicated to another (the secondary previously known as slave).
 
 ### Highlights
 This package is designed to solve a number of different problems with performance, supporting the backup of different databases, and as a part of a larger solution to alleviate system failures.<br />
-It enables data from one database server (the master) to be replicated to to another (the slave). The master logs the updates, which then ripple through to the slave. The slave outputs a message stating that it has received the update successfully, thus allowing to send the subsequent updates. Master-slave replication can be asynchronous.<br />
+It enables data from one database server (the primary) to be replicated to another (the secondary). The primary logs the updates, which then ripple through to the secondary. The secodnary outputs a message stating that it has received the update successfully, thus allowing to send the subsequent updates. Primary-Secondary replication can be asynchronous.<br />
 
 The target usage for replication in MariaDB databases includes:
   -  Data security
@@ -25,7 +25,7 @@ DB                  |    MariaDB    |       2                                   
 * DB - Database 
 * CT - Container
 
-**MariaDB Database**: 5.5.47
+**MariaDB Database**: 10.5.8
 
 ### Deployment
 
